@@ -1,0 +1,21 @@
+{
+  "name": "webm-screamer",
+  "version": "1.0.0",
+  "description": "webm screamer node js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "buffered-spawn": "^3.3.2",
+    "cors": "^2.8.4",
+    "download": "^7.0.0",
+    "express": "^4.16.3",
+    "fluent-ffmpeg": "^2.1.2",
+    "mongodb": "^3.1.0",
+    "npm": "^6.1.0"
+  }
+}
