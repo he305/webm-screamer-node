@@ -29,30 +29,4 @@ exports.findByMD5 = function(req, res) {
         console.log(err);
         return res.sendStatus(500);
     })
-
-
-
-        // if (err) {
-        //     console.log(err);
-        //     return res.sendStatus(500);
-        // }
-        // if (doc) {
-        //     return res.json({"md5": doc.md5, "scream_chance" : doc.screamer_chance});
-        // } 
-        // video.download_video("https://2ch.hk" + req.body.url, function(error, screamer_chance) {
-        //     if (error) {
-        //         return res.status(400).json({"error" : error});
-        //     }
-        //     Webm.insert(req.body.md5, screamer_chance, (err, result) => {
-        //         if (err) {
-        //             console.log("Failed to insert to database")
-        //             return res.status(400).json({"error" : error});
-        //         }
-        //         res.header("Access-Control-Allow-Origin", "*");
-        //         res.header("Access-Control-Allow-Headers", "X-Requested-With");
-        //         return res.json({"md5" : req.body.md5, "scream_chance" : screamer_chance});
-        //     })
-        // })
-        
-
 }

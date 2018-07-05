@@ -38,34 +38,6 @@ exports.download_video = function (url) {
             reject(err);
         })
     });
-
-    // file_name = url.split('/').pop()
-    // console.log(url);
-    // download(url, __dirname).then(data => {
-    //     fs.writeFileSync(__dirname + '/' + file_name, data)
-    //     get_ffmpeg_output(__dirname + '/' + file_name, function(err, scream_chance) {
-    //         if (err) {
-    //             if (fs.existsSync(__dirname + '/' + file_name)) {
-    //                 fs.unlink(__dirname + '/' + file_name, function(err){
-    //                 });
-    //             }
-    //             cb(err);
-    //             return;
-    //         }
-            
-    
-    //         fs.unlink(__dirname + '/' + file_name, function(err){
-    //             if(err) {
-    //                 cb(err);
-    //                 return;
-    //             }
-    //         });
-    //         cb(null, scream_chance);
-    //     })
-    // })
-    // .catch((err) => {
-    //     console.log(err);
-    // })
 }
 
 function determine_scream_chance(parsed){

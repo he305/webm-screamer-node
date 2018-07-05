@@ -1,6 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var db;
-var connectionString = process.env.DATABASE_URL || "mongodb://he305:krabster305@ds227171.mlab.com:27171/webms_db";
+var connectionString = process.env.DATABASE_URL
 
 var state = {
     db: null
