@@ -20,10 +20,6 @@ app.post('/', (req, res) => {
 app.post('/api', webmController.findByMD5);
 
 db.connect(function(err) {
-    if (err || process.env.DATABASE_URL) {
-        return console.log(err);
-    }
-    
     var server = app.listen(port, () => {
         console.log("Server started");
     });
