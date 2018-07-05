@@ -28,5 +28,5 @@ db.connect(function(err) {
     var server = app.listen(port, () => {
         console.log("Server started");
     });
-    server.setTimeout(300);
+    server.setTimeout(180000);
 });
