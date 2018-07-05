@@ -6,6 +6,8 @@ var down = require('./ffmpeg')
 var cors = require('cors')
 var app = express()
 
+var port = process.env.PORT || 8080;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors())
@@ -23,7 +25,7 @@ db.connect(function(err) {
         return console.log(err);
     }
     
-    app.listen(5000, () => {
+    app.listen(port, () => {
         
         console.log("Server started");
 
