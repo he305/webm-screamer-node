@@ -12,31 +12,22 @@ exports.download_video = function (url) {
     return new Promise(function(resolve, reject) {
         var file_name = url.split('/').pop()
         download(url, __dirname)
-        .then(data => {
-            fs.writeFile(__dirname + '/' + file_name, data, function(err) {
-                if (err) reject(err)
+            .then(data => {
+                fs.writeFileSync(__dirname + '/' + file_name, data)
+
                 get_ffmpeg_output(__dirname + '/' + file_name)
-                .then(function(data) {
-                    fs.unlink(__dirname + '/' + file_name, function(err){
-                        if(err) {
-                            reject(err);
-                        }
+                    .then(function(data) {
+                        fs.unlinkSync(__dirname + '/' + file_name)
                         resolve(data)
-                    });
-                })
-                .catch(function(err) {
-                    fs.unlink(__dirname + '/' + file_name, function(err){
-                        if(err) {
-                            reject(err);
-                        }
-                    });
-                    reject(err);
-                })
-            });
-        })
-        .catch(function(err) {
-            reject(err);
-        })
+                    })
+                    .catch(function(err) {
+                        fs.unlinkSync(__dirname + '/' + file_name)
+                        reject(err);
+                    })
+            })
+            .catch(function(err) {
+                reject(err);
+            })
     });
 }
 
@@ -62,7 +53,7 @@ function get_ffmpeg_output(filename) {
             .addOption('-hide_banner')
             .addOption('-filter_complex', "ebur128=dualmono=true")
             .on('start', function(ffcommand) {
-                console.log("ffmpeg for ${filename} started");
+                console.log("ffmpeg for " + filename + " started");
             })
             .on('stderr', function(stderrLine) {
                 data += stderrLine + '\n';
