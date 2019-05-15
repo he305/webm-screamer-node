@@ -60,7 +60,7 @@ function get_ffmpeg_output(filename) {
             .on('end', function(stdout, stderr) {
                 var lines = data.split('\n') 
                 
-                line_reg = (/\[Parsed_ebur128_\d @ [0-9a-z]{2,16}\]\s+t:\s*([\d.]+)\s+M:\s*([-\d.]+)\s+S:\s*([-\d.]+)\s+I:\s*([-\d.]+) LUFS\s+LRA:\s*([-\d.]+) LU/)
+                line_reg = (/\[Parsed_ebur128_\d @ [0-9a-z]{2,16}\]\s+t:\s*([\d.]+)\s+TARGET:\s*([-\d]+)\s+LUFS\s+M:\s*([-\d.]+)\s+S:\s*([-\d.]+)\s+I:\s*([-\d.]+)\s*LUFS\s+LRA:\s*([\d.]+) LU/)
         
                 var M = -120.0
                 var S = -120.0
@@ -68,14 +68,14 @@ function get_ffmpeg_output(filename) {
                     element = element.trim();
                     match = element.match(line_reg);
                     if (match) {    
-                        M = Math.max(M, Number(match[2]))
-                        S = Math.max(S, Number(match[3]))
+                        M = Math.max(M, Number(match[3]))
+                        S = Math.max(S, Number(match[4]))
                     }
                 });
         
                 if (error) {
                     reject(error)
-                } 
+                }
                 console.log(Math.max(M, S))
                 resolve(determine_scream_chance(Math.max(M, S)))
             })
