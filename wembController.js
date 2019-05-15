@@ -7,7 +7,7 @@ exports.findByMD5 = function(req, res) {
     .then(function(doc) {
         if (doc) {
             return res.json({"md5": doc.md5, "scream_chance" : doc.screamer_chance});
-        } 
+        }
         video.download_video("https://2ch.hk" + req.body.url)
         .then(function(screamer_chance) {
             Webm.insert(req.body.md5, screamer_chance)

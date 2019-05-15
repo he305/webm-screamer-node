@@ -13,22 +13,16 @@ exports.download_video = function (url) {
         var file_name = url.split('/').pop()
         download(url, __dirname)
         .then(data => {
-            fs.writeFile(__dirname + '/' + file_name, data, function(err) {
-                if (err) reject(err)
+            fs.writeFileSync(__dirname + '/' + file_name, data)
                 get_ffmpeg_output(__dirname + '/' + file_name)
                 .then(function(data) {
-                    fs.unlink(__dirname + '/' + file_name, function(err){
-                        if(err) reject(err);
-                        resolve(data)
-                    });
+                    fs.unlinkSync(__dirname + '/' + file_name)
+                    resolve(data)
                 })
                 .catch(function(err) {
-                    fs.unlink(__dirname + '/' + file_name, function(err){
-                        if(err) reject(err);
-                    });
+                    fs.unlinkSync(__dirname + '/' + file_name)
                     reject(err);
                 })
-            });
         })
         .catch(function(err) {
             reject(err);
