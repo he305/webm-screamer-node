@@ -76,6 +76,7 @@ function get_ffmpeg_output(filename) {
                 if (error) {
                     reject(error)
                 } 
+                console.log(Math.max(M, S))
                 resolve(determine_scream_chance(Math.max(M, S)))
             })
             .on('error', function(err, stdout, stderr) {
