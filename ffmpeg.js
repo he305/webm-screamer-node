@@ -58,7 +58,6 @@ function get_ffmpeg_output(filename) {
                 data += stderrLine + '\n';
             })
             .on('end', function(stdout, stderr) {
-                console.log(data)
                 var lines = data.split('\n') 
                 
                 line_reg = (/\[Parsed_ebur128_\d @ [0-9a-z]{2,16}\]\s+t:\s*([\d.]+)\s+M:\s*([-\d.]+)\s+S:\s*([-\d.]+)\s+I:\s*([-\d.]+) LUFS\s+LRA:\s*([-\d.]+) LU/)
