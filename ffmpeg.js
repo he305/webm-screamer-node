@@ -12,22 +12,27 @@ exports.download_video = function (url) {
     return new Promise(function(resolve, reject) {
         var file_name = url.split('/').pop()
         download(url, __dirname)
-            .then(data => {
-                fs.writeFileSync(__dirname + '/' + file_name, data)
-
+        .then(data => {
+            fs.writeFile(__dirname + '/' + file_name, data, function(err) {
+                if (err) reject(err)
                 get_ffmpeg_output(__dirname + '/' + file_name)
-                    .then(function(data) {
-                        fs.unlinkSync(__dirname + '/' + file_name)
+                .then(function(data) {
+                    fs.unlink(__dirname + '/' + file_name, function(err){
+                        if(err) reject(err);
                         resolve(data)
-                    })
-                    .catch(function(err) {
-                        fs.unlinkSync(__dirname + '/' + file_name)
-                        reject(err);
-                    })
-            })
-            .catch(function(err) {
-                reject(err);
-            })
+                    });
+                })
+                .catch(function(err) {
+                    fs.unlink(__dirname + '/' + file_name, function(err){
+                        if(err) reject(err);
+                    });
+                    reject(err);
+                })
+            });
+        })
+        .catch(function(err) {
+            reject(err);
+        })
     });
 }
 
@@ -75,7 +80,7 @@ function get_ffmpeg_output(filename) {
                 });
         
                 if (error) {
-                    resolve(0.0)
+                    reject(error)
                 } 
                 resolve(determine_scream_chance(Math.max(M, S)))
             })
@@ -84,7 +89,7 @@ function get_ffmpeg_output(filename) {
                 error = err;
 
                 if (error) {
-                    resolve(0.0)
+                    reject(error)
                 } 
             })
             .saveToFile('NUL')
