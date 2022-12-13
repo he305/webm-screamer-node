@@ -13,7 +13,7 @@
     "buffered-spawn": "^3.3.2",
     "cors": "^2.8.4",
     "download": "^7.0.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "fluent-ffmpeg": "^2.1.2",
     "mongodb": "^3.1.0",
     "npm": "^6.1.0"
